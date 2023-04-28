@@ -4,6 +4,13 @@ import ARKit
 func createWorldTrackingConfiguration(_ arguments: Dictionary<String, Any>) -> ARWorldTrackingConfiguration? {
     if(ARWorldTrackingConfiguration.isSupported) {
         let worldTrackingConfiguration = ARWorldTrackingConfiguration()
+
+        if #available(iOS 16.0, *) {  
+            if let format = ARWorldTrackingConfiguration.recommendedVideoFormatForHighResolutionFrameCapturing {
+                worldTrackingConfiguration.videoFormat = format
+            }
+        }
+
         if #available(iOS 12.0, *) {
           if let environmentTexturing = arguments["environmentTexturing"] as? Int {
             if environmentTexturing == 0 {
