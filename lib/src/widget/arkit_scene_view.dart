@@ -436,6 +436,13 @@ class ARKitController {
     });
   }
 
+  /// Set the AR world origin
+  Future<void> onSetWorldOrigin({required Matrix4 origin}) {
+    return _channel.invokeMethod('setWorldOrigin', {
+      'origin': MatrixConverter().toJson(origin),
+    });
+  }
+
   /// A view that displays standardized onboarding instructions to direct users toward a specific goal.
   /// The view will use context aware messaging and animations to instruct the user on gathering required info for the AR session.
   /// Requires iOS 13 and above.

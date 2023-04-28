@@ -119,6 +119,11 @@ class FlutterArkitView: NSObject, FlutterPlatformView {
         case "snapshot":
             onGetSnapshot(result)
             break
+        case "setWorldOrigin":
+            if #available(iOS 11.3, *) {
+                onSetWorldOrigin(arguments!)
+            }
+            break;
         default:
             result(FlutterMethodNotImplemented)
             break

@@ -244,6 +244,16 @@ extension FlutterArkitView {
         }
    }
 
+    @available(iOS 11.3, *)
+    func onSetWorldOrigin(_ arguments: Dictionary<String, Any>) {
+        guard let transform = arguments["origin"] as? Array<NSNumber> else {
+            logPluginError("failed to set origin", toChannel: channel)
+            return
+        }
+        let origin = simd_float4x4(deserializeMatrix4(transform));
+        sceneView.session.setWorldOrigin(relativeTransform: origin)
+    }
+
    func onGetSnapshot(_ result:FlutterResult) {
         let snapshotImage = sceneView.snapshot()
         if let bytes = snapshotImage.pngData() {
